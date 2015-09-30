@@ -3,6 +3,9 @@ var QuarterbackComponent = require('./QuarterbackComponent');
 
 module.exports = React.createClass({
 	render: function() {
+		var allQBS = this.props.quarterbacks.map(function(player){
+			return (<QuarterbackComponent qb={player} />)
+		})
 		return (
 			<div className="row">
 				<h1>Quarterbacks</h1>
@@ -20,6 +23,7 @@ module.exports = React.createClass({
 						</tr>
 					</thead>
 					<tbody>
+					{allQBS}
 					</tbody>
 				</table>
 			</div>

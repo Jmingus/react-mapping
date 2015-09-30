@@ -32614,6 +32614,9 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	render: function render() {
+		var allCats = this.props.cats.map(function (model) {
+			return React.createElement(CatComponent, { cat: model });
+		});
 		return React.createElement(
 			'div',
 			{ className: 'row' },
@@ -32648,7 +32651,11 @@ module.exports = React.createClass({
 						)
 					)
 				),
-				React.createElement('tbody', null)
+				React.createElement(
+					'tbody',
+					null,
+					allCats
+				)
 			)
 		);
 	}
@@ -32701,6 +32708,9 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	render: function render() {
+		var allProducts = this.props.products.map(function (item) {
+			return React.createElement(ProductComponent, { product: item });
+		});
 		return React.createElement(
 			'div',
 			{ className: 'row' },
@@ -32740,7 +32750,11 @@ module.exports = React.createClass({
 						)
 					)
 				),
-				React.createElement('tbody', null)
+				React.createElement(
+					'tbody',
+					null,
+					allProducts
+				)
 			)
 		);
 	}
@@ -32761,42 +32775,42 @@ module.exports = React.createClass({
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('name')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('team')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('attempts')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('completions')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('yards')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('touchdowns')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('interceptions')
 			),
 			React.createElement(
 				'td',
 				null,
-				'-'
+				this.props.qb.get('sacks')
 			)
 		);
 	}
@@ -32812,6 +32826,9 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	render: function render() {
+		var allQBS = this.props.quarterbacks.map(function (player) {
+			return React.createElement(QuarterbackComponent, { qb: player });
+		});
 		return React.createElement(
 			'div',
 			{ className: 'row' },
@@ -32871,7 +32888,11 @@ module.exports = React.createClass({
 						)
 					)
 				),
-				React.createElement('tbody', null)
+				React.createElement(
+					'tbody',
+					null,
+					allQBS
+				)
 			)
 		);
 	}
@@ -32883,9 +32904,24 @@ module.exports = React.createClass({
 var React = require('react');
 
 module.exports = React.createClass({
-	displayName: 'exports',
+  displayName: 'exports',
 
-	render: function render() {}
+  render: function render() {
+    return React.createElement(
+      'tr',
+      null,
+      React.createElement(
+        'td',
+        null,
+        this.props.item.get('description')
+      ),
+      React.createElement(
+        'td',
+        null,
+        this.props.item.get('completed').toString()
+      )
+    );
+  }
 });
 
 },{"react":159}],171:[function(require,module,exports){
@@ -32895,19 +32931,50 @@ var React = require('react');
 var TodoComponent = require('./TodoComponent');
 
 module.exports = React.createClass({
-	displayName: 'exports',
+  displayName: 'exports',
 
-	render: function render() {
-		return React.createElement(
-			'div',
-			{ className: 'row' },
-			React.createElement(
-				'h1',
-				null,
-				'Todos'
-			)
-		);
-	}
+  render: function render() {
+    var allTodos = this.props.todos.map(function (item) {
+      return React.createElement(TodoComponent, { item: item });
+    });
+
+    return React.createElement(
+      'div',
+      { className: 'row' },
+      React.createElement(
+        'h1',
+        null,
+        'Todos'
+      ),
+      React.createElement(
+        'table',
+        { className: 'table' },
+        React.createElement(
+          'thead',
+          null,
+          React.createElement(
+            'tr',
+            null,
+            React.createElement(
+              'th',
+              null,
+              'Thing to do'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Completed'
+            )
+          )
+        ),
+        React.createElement(
+          'tbody',
+          null,
+          allTodos
+        )
+      )
+    );
+  }
 });
 
 },{"./TodoComponent":170,"react":159}],172:[function(require,module,exports){
